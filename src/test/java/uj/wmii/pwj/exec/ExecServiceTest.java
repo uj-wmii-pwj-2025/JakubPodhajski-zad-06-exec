@@ -107,7 +107,7 @@ public class ExecServiceTest {
         MyExecService s = MyExecService.newInstance();
         List<Callable<String>> list = new ArrayList<>();
         list.add(new StringCallable("ok", 100));
-        list.add(null); // To powinno wywołać NPE wewnątrz pętli submitującej
+        list.add(null); 
 
         assertThrows(NullPointerException.class, () -> {
             s.invokeAny(list);
@@ -119,8 +119,6 @@ public class ExecServiceTest {
         MyExecService s = MyExecService.newInstance();
         List<Callable<String>> list = new ArrayList<>();
 
-        // Twoja implementacja rzuca ExecutionException(RuntimeException) gdy lista jest pusta
-        // (pętla się nie wykonuje, lastException jest null)
         assertThrows(ExecutionException.class, () -> {
             s.invokeAny(list);
         });
